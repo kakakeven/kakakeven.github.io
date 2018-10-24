@@ -339,7 +339,7 @@
                 
               
 
-              <time title="创建时间：2018-10-24 19:55:17 / 修改时间：20:01:07" itemprop="dateCreated datePublished" datetime="2018-10-24T19:55:17+08:00">2018-10-24</time>
+              <time title="创建时间：2018-10-24 19:55:17 / 修改时间：20:04:32" itemprop="dateCreated datePublished" datetime="2018-10-24T19:55:17+08:00">2018-10-24</time>
             
 
             
@@ -379,10 +379,10 @@
       
         
           
-            <h3 id="1-新建-maven-工程"><a href="#1-新建-maven-工程" class="headerlink" title="1 新建 maven 工程"></a>1 新建 maven 工程</h3><p>执行 maven 命令，新建工程 <code>java_agent_demo</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line">-DgroupId=com.lintrp </span><br><span class="line">-DartifactId=java_agent_demo</span><br><span class="line">-DarchetypeArtifactId=maven-archetype-quickstart </span><br><span class="line">-DinteractiveMode=false</span><br></pre></td></tr></table></figure></p>
+            <h3 id="新建-maven-工程"><a href="#新建-maven-工程" class="headerlink" title="新建 maven 工程"></a>新建 maven 工程</h3><p>执行 maven 命令，新建工程 <code>java_agent_demo</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line">-DgroupId=com.lintrp </span><br><span class="line">-DartifactId=java_agent_demo</span><br><span class="line">-DarchetypeArtifactId=maven-archetype-quickstart </span><br><span class="line">-DinteractiveMode=false</span><br></pre></td></tr></table></figure></p>
 <p>修改 pom，添加 <code>maven-assembly-plugin</code> 插件(插件主要用于生成 <code>MANIFEST.MF</code> 文件)；</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;</span><br><span class="line">    &lt;executions&gt;</span><br><span class="line">        &lt;execution&gt;</span><br><span class="line">            &lt;goals&gt;</span><br><span class="line">                &lt;goal&gt;attached&lt;/goal&gt;</span><br><span class="line">            &lt;/goals&gt;</span><br><span class="line">            &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line">            &lt;configuration&gt;</span><br><span class="line">                &lt;descriptorRefs&gt;</span><br><span class="line">                    &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;</span><br><span class="line">                &lt;/descriptorRefs&gt;</span><br><span class="line">                &lt;archive&gt;</span><br><span class="line">                    &lt;manifestEntries&gt;</span><br><span class="line">                        // Java Agent 方法执行入口</span><br><span class="line">                        &lt;Premain-Class&gt;com.gitee.maolv.java.AgentDemo&lt;/Premain-Class&gt;</span><br><span class="line">                        &lt;Can-Redefine-Classes&gt;true&lt;/Can-Redefine-Classes&gt;</span><br><span class="line">                        &lt;Can-Retransform-Classes&gt;true&lt;/Can-Retransform-Classes&gt;</span><br><span class="line">                    &lt;/manifestEntries&gt;</span><br><span class="line">                &lt;/archive&gt;</span><br><span class="line">            &lt;/configuration&gt;</span><br><span class="line">        &lt;/execution&gt;</span><br><span class="line">    &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-编写-AgentDemo"><a href="#2-编写-AgentDemo" class="headerlink" title="2 编写 AgentDemo"></a>2 编写 <code>AgentDemo</code></h3><blockquote>
+<h3 id="编写-AgentDemo"><a href="#编写-AgentDemo" class="headerlink" title="编写 AgentDemo"></a>编写 <code>AgentDemo</code></h3><blockquote>
 <p>Agent 入口类需要包含以下两个方法中的一个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Method1 : public static void premain(String featureString, Instrumentation instrumentation) &#123; ... &#125;</span><br><span class="line">Method2 : public static void premain(String featureString) &#123; ... &#125;</span><br></pre></td></tr></table></figure></p>
 </blockquote>
 <blockquote>
@@ -390,16 +390,16 @@
 </blockquote>
 <p>编写 <code>Agent</code>代码，示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Java Agent Demo</span><br><span class="line"> *</span><br><span class="line"> * @author kevinG</span><br><span class="line"> */</span><br><span class="line">public class AgentDemo &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Agent 启动方法【Method1】</span><br><span class="line">     *</span><br><span class="line">     * @param featureString</span><br><span class="line">     * @param instrumentation</span><br><span class="line">     */</span><br><span class="line">    public static void premain(String featureString, Instrumentation instrumentation) &#123;</span><br><span class="line">        System.out.println(&quot;===Step in Agent Method1===&quot;);</span><br><span class="line">        System.out.println(&quot;supportReDefine:&quot; + instrumentation.isRedefineClassesSupported());</span><br><span class="line">        System.out.println(&quot;supportReTransform:&quot; + instrumentation.isRetransformClassesSupported());</span><br><span class="line">        System.out.println(&quot;featureString:&quot; +  featureString);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Agent 启动方法【Method2】</span><br><span class="line">     * 启动加载优先级低于 【Method1】premain(String featureString, Instrumentation instrumentation)</span><br><span class="line">     *</span><br><span class="line">     * @param featureString</span><br><span class="line">     */</span><br><span class="line">    public static void premain(String featureString) &#123;</span><br><span class="line">        System.out.println(&quot;===Step in Agent Method2====&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="3-打包-java-agent-demo"><a href="#3-打包-java-agent-demo" class="headerlink" title="3 打包 java_agent_demo"></a>3 打包 <code>java_agent_demo</code></h3><p>执行 mvn 命令</p>
+<h3 id="打包-java-agent-demo"><a href="#打包-java-agent-demo" class="headerlink" title="打包 java_agent_demo"></a>打包 <code>java_agent_demo</code></h3><p>执行 mvn 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvn clean compile package</span><br></pre></td></tr></table></figure>
-<h3 id="4-使用自定义的-Agent"><a href="#4-使用自定义的-Agent" class="headerlink" title="4 使用自定义的 Agent"></a>4 使用自定义的 Agent</h3><p>首先新建测试类 <code>TestDemoAgent</code></p>
+<h3 id="使用自定义的-Agent"><a href="#使用自定义的-Agent" class="headerlink" title="使用自定义的 Agent"></a>使用自定义的 Agent</h3><p>首先新建测试类 <code>TestDemoAgent</code></p>
 <p>代码示例如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Java Agent Demo 测试类</span><br><span class="line"> *</span><br><span class="line"> * @author kevinG</span><br><span class="line"> */</span><br><span class="line">public class TestDemoAgent &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        System.out.println(&quot;Hello World!&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>运行 <code>main</code> 方法，输出如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello World!</span><br></pre></td></tr></table></figure></p>
 <p>修改 <code>main</code> 方法执行配置,在 <code>VM options</code> 中添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-javaagent:&#123;workspace&#125;/java_code_example/javaagent_demo/target/javaagent_demo-0.0.1-jar-with-dependencies.jar=Hello</span><br></pre></td></tr></table></figure>
 <p>重新运行 <code>main</code> 方法，输出如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">===Step in Agent Method1===</span><br><span class="line">supportReDefine:true</span><br><span class="line">supportReTransform:true</span><br><span class="line">featureString:Hello</span><br><span class="line">Hello World!</span><br></pre></td></tr></table></figure></p>
 <p><code>Hello</code> 为 <code>VM options</code> 中新增的自定义参数；</p>
-<h3 id="5-参考文档"><a href="#5-参考文档" class="headerlink" title="5 参考文档"></a>5 参考文档</h3><ul>
+<h3 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h3><ul>
 <li><a href="https://www.jianshu.com/p/3bbfa22ec7f5" target="_blank" rel="noopener">Java字节码1-Agent简单上手</a></li>
 <li><a href="https://www.jianshu.com/p/14bcb17b99e0" target="_blank" rel="noopener">maven-assembly-plugin 入门指南</a></li>
 </ul>
@@ -503,12 +503,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 14:21:52 / 修改时间：14:26:00" itemprop="dateCreated datePublished" datetime="2018-10-18T14:21:52+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 14:21:52" itemprop="dateCreated datePublished" datetime="2018-10-18T14:21:52+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-24 20:06:05" itemprop="dateModified" datetime="2018-10-24T20:06:05+08:00">2018-10-24</time>
               
             
           </span>
@@ -543,36 +555,38 @@
       
         
           
-            <h3 id="1-新建-GitPage-项目"><a href="#1-新建-GitPage-项目" class="headerlink" title="1 新建 GitPage 项目"></a>1 新建 GitPage 项目</h3><blockquote>
+            <h3 id="新建-GitPage-项目"><a href="#新建-GitPage-项目" class="headerlink" title="新建 GitPage 项目"></a>新建 GitPage 项目</h3><blockquote>
 <p><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages </a>是面向用户、组织和项目开放的公共静态页面搭建托管服务，可用于搭建个人博客。</p>
 </blockquote>
 <p>创建新的 Repository，并命名为 kakakeven.github.io</p>
-<h3 id="2-安装-Hexo"><a href="#2-安装-Hexo" class="headerlink" title="2 安装 Hexo"></a>2 安装 Hexo</h3><blockquote>
+<h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><blockquote>
 <p>参考链接：<a href="https://hexo.io/zh-cn/docs/index.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/index.html</a></p>
 </blockquote>
 <p>验证安装命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ node -v : 验证 node 安装版本</span><br><span class="line">$ npm -v : 验证 npm 安装版本</span><br><span class="line">$ hexo -v : 验证 hexo 安装版本</span><br></pre></td></tr></table></figure>
 <p>Hexo 安装命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-初始化-Blog"><a href="#3-初始化-Blog" class="headerlink" title="3 初始化 Blog"></a>3 初始化 Blog</h3><p>安装 Hexo 完成后，执行下列命令，会在指定文件夹中新建所需要的文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt; </span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
+<h3 id="初始化-Blog"><a href="#初始化-Blog" class="headerlink" title="初始化 Blog"></a>初始化 Blog</h3><p>安装 Hexo 完成后，执行下列命令，会在指定文件夹中新建所需要的文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt; </span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p>
 <p>执行下列命令，可以查看在本地预览；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g // 生成静态页面</span><br><span class="line">$ hexo s // 启动本地 blog 服务器</span><br></pre></td></tr></table></figure></p>
 <p>打开浏览器，在地址栏输入 localhost:4000，就可以查看本地博客了</p>
-<h3 id="4-同步-Hexo-博客到-Github"><a href="#4-同步-Hexo-博客到-Github" class="headerlink" title="4 同步 Hexo 博客到 Github"></a>4 同步 Hexo 博客到 Github</h3><p>Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上。部署到 Github Pages，步骤如下：</p>
+<h3 id="同步-Hexo-博客到-Github"><a href="#同步-Hexo-博客到-Github" class="headerlink" title="同步 Hexo 博客到 Github"></a>同步 Hexo 博客到 Github</h3><p>Hexo 提供了快速方便的一键部署功能，让您只需一条命令就能将网站部署到服务器上。部署到 Github Pages，步骤如下：</p>
 <p><strong>安装  hexo-deployer-git</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
 <p><strong>修改部署配置</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:kakakeven/kakakeven.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <p><strong>执行部署</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d // 将本地博客发布到 github</span><br></pre></td></tr></table></figure>
-<h3 id="5-Next-主题配置"><a href="#5-Next-主题配置" class="headerlink" title="5 Next 主题配置"></a>5 Next 主题配置</h3><p><strong>下载主题</strong></p>
+<h3 id="Next-主题配置"><a href="#Next-主题配置" class="headerlink" title="Next 主题配置"></a>Next 主题配置</h3><p><strong>下载主题</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:theme-next/hexo-theme-next.git themes/next</span><br></pre></td></tr></table></figure>
 <p><strong>应用主题</strong></p>
 <p>修改 _config.yml，将主题设置为 next</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure>
-<h3 id="6-域名设置"><a href="#6-域名设置" class="headerlink" title="6 域名设置"></a>6 域名设置</h3><p><strong>设置域名</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 切换到个人博客 repository [https://github.com/kakakeven/kakakeven.github.io]</span><br><span class="line">2 点击 Setting，进入项目设置页面</span><br><span class="line">3 在 Custom domain 下，新增域名配置，并点击保存；</span><br></pre></td></tr></table></figure></p>
+<h3 id="域名设置"><a href="#域名设置" class="headerlink" title="域名设置"></a>域名设置</h3><p><strong>设置域名</strong></p>
+<p>1 切换到个人博客 repository [<a href="https://github.com/kakakeven/kakakeven.github.io]" target="_blank" rel="noopener">https://github.com/kakakeven/kakakeven.github.io]</a><br>2 点击 Setting，进入项目设置页面<br>3 在 Custom domain 下，新增域名配置，并点击保存；</p>
 <p>参考链接：<br><a href="https://help.github.com/articles/adding-or-removing-a-custom-domain-for-your-github-pages-site/" target="_blank" rel="noopener">Adding or removing a custom domain for your GitHub Pages site</a></p>
 <p><strong>存在的问题</strong></p>
 <p>通过 Setting 添加的 CNAME 文件，每次执行 hexo deploy 的时候都会消失</p>
 <p><strong>解决方案</strong></p>
-<p><em>安装 hexo-generator-cname</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1 安装插件： npm install hexo-generator-cname --save</span><br><span class="line">2 启用插件：修改 _config.yml，配置 plugins:</span><br><span class="line">plugins:</span><br><span class="line">  hexo-generator-cname</span><br><span class="line">3 配置 CNAME： 修改 _config.yml，配置 url: http://lintrp.com</span><br></pre></td></tr></table></figure></p>
+<p><em>安装 hexo-generator-cname</em> </p>
+<p>1 安装插件： npm install hexo-generator-cname –save<br>2 启用插件：修改 _config.yml，配置 plugins:<br>plugins:<br>  hexo-generator-cname<br>3 配置 CNAME： 修改 _config.yml，配置 url: <a href="http://lintrp.com" target="_blank" rel="noopener">http://lintrp.com</a></p>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><ul>
 <li><a href="https://www.cnblogs.com/chengxs/p/7496265.html" target="_blank" rel="noopener">避免 CNAME 的覆盖</a></li>
 <li><a href="https://madongqiang2201.github.io/2016/07/21/Mac%E4%B8%8BHexo%EF%BC%8Bgithub-pages%E6%90%AD%E5%BB%BA%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">推荐：Mac搭建Hexo博客及NexT主题配置优化</a></li>
