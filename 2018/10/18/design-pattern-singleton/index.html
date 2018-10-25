@@ -108,18 +108,18 @@
 
 
 
-  <meta name="description" content="单例模式">
+  <meta name="description" content="什么是单例模式？ 单例模式，是一种常用的软件设计模式，属于对象创建模式的一种。在应用这个模式时，单例对象的类必须保证只有一个实例存在。    单例模式的使用场景？ 系统关键组件，需要保证系统中只有一个实例； 类的初始化需要消耗较多的系统资源；  如何实现？ 私有的构造函数。杜绝外部通过构造方法显式创建类的实例，确保系统中仅有一个实例的存在； 提供单例实例的全局访问点。一般为 Method name">
 <meta name="keywords" content="设计模式,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式之单例模式">
 <meta property="og:url" content="http://lintrip.com/2018/10/18/design-pattern-singleton/index.html">
 <meta property="og:site_name" content="飞翔的花狸猫">
-<meta property="og:description" content="单例模式">
+<meta property="og:description" content="什么是单例模式？ 单例模式，是一种常用的软件设计模式，属于对象创建模式的一种。在应用这个模式时，单例对象的类必须保证只有一个实例存在。    单例模式的使用场景？ 系统关键组件，需要保证系统中只有一个实例； 类的初始化需要消耗较多的系统资源；  如何实现？ 私有的构造函数。杜绝外部通过构造方法显式创建类的实例，确保系统中仅有一个实例的存在； 提供单例实例的全局访问点。一般为 Method name">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-18T06:40:48.000Z">
+<meta property="og:updated_time" content="2018-10-25T08:07:30.038Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式之单例模式">
-<meta name="twitter:description" content="单例模式">
+<meta name="twitter:description" content="什么是单例模式？ 单例模式，是一种常用的软件设计模式，属于对象创建模式的一种。在应用这个模式时，单例对象的类必须保证只有一个实例存在。    单例模式的使用场景？ 系统关键组件，需要保证系统中只有一个实例； 类的初始化需要消耗较多的系统资源；  如何实现？ 私有的构造函数。杜绝外部通过构造方法显式创建类的实例，确保系统中仅有一个实例的存在； 提供单例实例的全局访问点。一般为 Method name">
 
 
 
@@ -339,12 +339,24 @@
                 
               
 
-              <time title="创建时间：2018-10-18 13:35:08 / 修改时间：14:40:48" itemprop="dateCreated datePublished" datetime="2018-10-18T13:35:08+08:00">2018-10-18</time>
+              <time title="创建时间：2018-10-18 13:35:08" itemprop="dateCreated datePublished" datetime="2018-10-18T13:35:08+08:00">2018-10-18</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-10-25 16:07:30" itemprop="dateModified" datetime="2018-10-25T16:07:30+08:00">2018-10-25</time>
               
             
           </span>
@@ -377,7 +389,45 @@
       
 
       
-        <p>单例模式</p>
+        <h2 id="什么是单例模式？"><a href="#什么是单例模式？" class="headerlink" title="什么是单例模式？"></a>什么是单例模式？</h2><blockquote>
+<p>单例模式，是一种常用的软件设计模式，属于对象创建模式的一种。在应用这个模式时，单例对象的类必须保证只有一个实例存在。  </p>
+</blockquote>
+<h2 id="单例模式的使用场景？"><a href="#单例模式的使用场景？" class="headerlink" title="单例模式的使用场景？"></a>单例模式的使用场景？</h2><ul>
+<li>系统关键组件，需要保证系统中只有一个实例；</li>
+<li>类的初始化需要消耗较多的系统资源；</li>
+</ul>
+<h2 id="如何实现？"><a href="#如何实现？" class="headerlink" title="如何实现？"></a>如何实现？</h2><ul>
+<li>私有的构造函数。杜绝外部通过构造方法显式创建类的实例，确保系统中仅有一个实例的存在；</li>
+<li>提供单例实例的全局访问点。一般为 <code>Method name</code> 为 <code>getInstance()</code> 的静态方法，返回结果为单例实例；</li>
+<li>获取单例实例时，首先判断虚拟机中实例是否已存在，如果有则返回，如果没有则创建；</li>
+</ul>
+<h2 id="常见写法及分析"><a href="#常见写法及分析" class="headerlink" title="常见写法及分析"></a>常见写法及分析</h2><p>单例模式虽然简单，实现方式却比孔乙己老先生的茴字写法还要多。以下：</p>
+<h4 id="饿汉模式"><a href="#饿汉模式" class="headerlink" title="饿汉模式"></a>饿汉模式</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 单例（饥饿模式）：静态变量初始化保证线程安全</span><br><span class="line"> */</span><br><span class="line">public final class HungerSingleton &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 私有构造方法，保证不能通过 new 创建新的实例</span><br><span class="line">     */</span><br><span class="line">    private HungerSingleton()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 静态示例变量</span><br><span class="line">     */</span><br><span class="line">    private static final HungerSingleton INSTANCE = new HungerSingleton();</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取类的单例实例</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static HungerSingleton getInstance()&#123;</span><br><span class="line">        return INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>饿汉模式是最常用的单例写法，JDK 中的 <code>java.lang.Runtime</code> 就是这样实现的，基于 <code>classloader</code> 机制，这种写法可以避免多线程的同步问题；不过 <code>instance</code> 在类装载的时候就实例化，容易产生垃圾对象，对于基础服务中的非核心模块，不建议使用饿汉模式，而应该使用懒加载的单例写法-“按需创建”。</p>
+</blockquote>
+<h4 id="Synchronized-版（懒汉式）"><a href="#Synchronized-版（懒汉式）" class="headerlink" title="Synchronized 版（懒汉式）"></a>Synchronized 版（懒汉式）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 同步版本的单例</span><br><span class="line"> * 1 懒加载</span><br><span class="line"> * 2 使用 Synchronized 关键字来实现互斥</span><br><span class="line"> * 3 最常见的懒汉版本</span><br><span class="line"> */</span><br><span class="line">public final class SynchronizedSingleton &#123;</span><br><span class="line">    private static SynchronizedSingleton instance;</span><br><span class="line"></span><br><span class="line">    private SynchronizedSingleton() &#123;</span><br><span class="line">        if (instance != null) &#123;</span><br><span class="line">            throw new IllegalStateException(&quot;单例实例已经初始化&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static synchronized SynchronizedSingleton getInstance() &#123;</span><br><span class="line">        if (instance == null) &#123;</span><br><span class="line">            instance = new SynchronizedSingleton();</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>同步版本的单例实现了懒加载，在多线程环境中也可以很好的工作，但是，效率很低，因为多数情况下都不需要同步。双重检查锁版本是对 <code>Synchronized</code> 版本的改进。</p>
+</blockquote>
+<h4 id="双重检查锁版（懒汉式）"><a href="#双重检查锁版（懒汉式）" class="headerlink" title="双重检查锁版（懒汉式）"></a>双重检查锁版（懒汉式）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 双重检查锁单例</span><br><span class="line"> * 1 懒加载；</span><br><span class="line"> * 2 线程安全（通过锁机制来保证）</span><br><span class="line"> * 相比 Synchronized 的写法会有性能上的提升，主要体现在不会每次获取实例都获取锁（只有在实例没有初始化的情况下，才会获取锁）；</span><br><span class="line"> */</span><br><span class="line">public final class DoubleCheckLockingSingleton &#123;</span><br><span class="line"></span><br><span class="line">    private static volatile DoubleCheckLockingSingleton instance;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 私有构造方法</span><br><span class="line">     */</span><br><span class="line">    private DoubleCheckLockingSingleton()&#123;</span><br><span class="line">        // 判断单例是否已经初始化，来组织反射创建单例</span><br><span class="line">        if (instance != null) &#123;</span><br><span class="line">            throw new IllegalStateException(&quot;单例对象已经初始化&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 单例方法</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static DoubleCheckLockingSingleton getInstance()&#123;</span><br><span class="line">        // 局部变量提升 25% 的性能？存疑 TODO 待考证</span><br><span class="line">        DoubleCheckLockingSingleton result = instance;</span><br><span class="line">        if (result == null) &#123;</span><br><span class="line">            synchronized (DoubleCheckLockingSingleton.class) &#123;</span><br><span class="line">                result = instance;</span><br><span class="line">                if (result == null) &#123;</span><br><span class="line">                    instance = result = new DoubleCheckLockingSingleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这种方式是懒加载常用的写法，在多线程环境中也可以保证单例的正确创建，<code>getInstance</code> 方法执行效率比 <code>Synchronized</code> 版本要高。</p>
+</blockquote>
+<h4 id="静态内部类版（懒汉式）"><a href="#静态内部类版（懒汉式）" class="headerlink" title="静态内部类版（懒汉式）"></a>静态内部类版（懒汉式）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 静态内部类延迟加载单例</span><br><span class="line"> */</span><br><span class="line">public final class OnDemandHolderSingleton &#123;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 私有构造方法</span><br><span class="line">     */</span><br><span class="line">    private OnDemandHolderSingleton()&#123;&#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 获取单例实例</span><br><span class="line">     *</span><br><span class="line">     * @return</span><br><span class="line">     */</span><br><span class="line">    public static OnDemandHolderSingleton getInstance() &#123;</span><br><span class="line">        return SingletonHolder.instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 静态内部类</span><br><span class="line">     */</span><br><span class="line">    private static class SingletonHolder &#123;</span><br><span class="line">        private static final OnDemandHolderSingleton instance = new OnDemandHolderSingleton();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>《Java并发编程实践》中推荐的单例写法，实现相比双重检查锁简单。适用于对静态域的延迟初始化；这种方式同样利用了 <code>classLoader</code>机制来保证 <code>instance</code> 初始化时的线程安全。内部类 <code>SingletonHolder</code> 只有在 <code>OnDemandHolderSingleton.getInstance()</code> 方法调用时，才会执行类加载，进而触发 <code>instance</code> 的创建。</p>
+</blockquote>
+<h4 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 枚举 : 枚举也是一种单例。</span><br><span class="line"> */</span><br><span class="line">public enum EnumSingleton &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>天生单例；不过这种写法很少见；</p>
+</blockquote>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">维基百科-单例模式</a></li>
+<li><a href="http://www.runoob.com/design-pattern/singleton-pattern.html" target="_blank" rel="noopener">菜鸟教程-单例模式</a></li>
+<li>推荐：<a href="https://github.com/iluwatar/java-design-patterns" target="_blank" rel="noopener">Github-java-design-patterns</a></li>
+</ul>
+<p>码云项目链接：<a href="https://gitee.com/maolv/java_code_example/tree/master/design_pattern/src/main/java/com/gitee/maolv/java/pattern/singleton" target="_blank" rel="noopener">https://gitee.com/maolv/java_code_example/tree/master/design_pattern/src/main/java/com/gitee/maolv/java/pattern/singleton</a></p>
 
       
     </div>
@@ -466,8 +516,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -533,6 +592,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是单例模式？"><span class="nav-number">1.</span> <span class="nav-text">什么是单例模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式的使用场景？"><span class="nav-number">2.</span> <span class="nav-text">单例模式的使用场景？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现？"><span class="nav-number">3.</span> <span class="nav-text">如何实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见写法及分析"><span class="nav-number">4.</span> <span class="nav-text">常见写法及分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#饿汉模式"><span class="nav-number">4.0.1.</span> <span class="nav-text">饿汉模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Synchronized-版（懒汉式）"><span class="nav-number">4.0.2.</span> <span class="nav-text">Synchronized 版（懒汉式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双重检查锁版（懒汉式）"><span class="nav-number">4.0.3.</span> <span class="nav-text">双重检查锁版（懒汉式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#静态内部类版（懒汉式）"><span class="nav-number">4.0.4.</span> <span class="nav-text">静态内部类版（懒汉式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#枚举"><span class="nav-number">4.0.5.</span> <span class="nav-text">枚举</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考链接"><span class="nav-number">5.</span> <span class="nav-text">参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
